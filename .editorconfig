@@ -1,0 +1,4 @@
+root=true
+
+[*.{vb,xaml,md}]
+insert_final_newline=true
