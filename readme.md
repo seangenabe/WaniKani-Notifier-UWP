@@ -4,7 +4,7 @@ WaniKani new lessons and reviews notifier (and more!) for Universal Windows Plat
 
 ## Features
 
-* Notifies when there are new lessons and reviews available via toast and tile.¹
+* Notifies when there are new lessons and reviews available via toast, tile, and badge.¹
 * Shows current level radical and kanji progress on tile.²
 * Shows critical items (Wall of Shame) on tile.²
 * Choose to drill lessons and reviews either in-app or in the default browser.
