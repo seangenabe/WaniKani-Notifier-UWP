@@ -36,6 +36,9 @@ Public NotInheritable Class MainPage
         ' Register background tasks
         RegisterBackgroundTasks()
 
+        ' Always send a notification on open.
+        ResetNotifier()
+
         ' Run the notifier task once.
         Await NotifierTask.Notify(True)
     End Sub
@@ -108,6 +111,10 @@ Public NotInheritable Class MainPage
         End Set
     End Property
 
+    Private Sub ResetNotifier()
+        NotifierTask.Reset()
+    End Sub
+
 #Region "Debug"
 
     Private Sub Test()
@@ -120,10 +127,6 @@ Public NotInheritable Class MainPage
 
     Private Sub SendDummyLessonsAndReviews()
         NotifierTask.SendNotifications(21, 21)
-    End Sub
-
-    Private Sub ResetNotifier()
-        NotifierTask.Reset()
     End Sub
 
     Private Async Sub Notify()

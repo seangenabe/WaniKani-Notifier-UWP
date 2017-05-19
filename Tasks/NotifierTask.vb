@@ -8,7 +8,6 @@ Imports Windows.Foundation.Metadata
 Imports Windows.Networking.Connectivity
 Imports Windows.Storage
 Imports Windows.UI.Notifications
-Imports Util
 
 Public NotInheritable Class NotifierTask
     Implements IBackgroundTask
@@ -100,8 +99,11 @@ Public NotInheritable Class NotifierTask
                 AddHandler emitter.LogUntouched, Sub() log.Info("Untouched.")
                 AddHandler emitter.LogScheduled, Sub(sender, ts) log.Info($"Scheduled: {XmlConvert.ToString(ts)}")
                 AddHandler emitter.LogNoPending, Sub(sender, ts) log.Info($"NoPending: {XmlConvert.ToString(ts)}")
+                log.Info("Calling emitter process.")
                 Dim delay = Await emitter.Process()
+                log.Info("Emitter process done.")
                 If delay Is Nothing Then
+                    log.Info("Unregistering: vacation mode is on")
                     ' Vacation mode is on
                     ' Clear notifications.
                     TileUpdateManager.CreateTileUpdaterForApplication().Clear()
@@ -112,6 +114,7 @@ Public NotInheritable Class NotifierTask
                 End If
 
                 If notifierEx IsNot Nothing Then
+                    log.Error("Notifier error occured.", notifierEx)
                     Throw notifierEx
                 End If
 
@@ -132,17 +135,22 @@ Public NotInheritable Class NotifierTask
     End Sub
 
     Friend Shared Async Sub SendNotifications(data As WaniKaniEmitter.StudyData)
+        log.Info($"{NameOf(SendNotifications)} called")
         Dim notificationText = BuildStudyNotificationText(data)
 
         ' Send toast notification
+        log.Info($"Sending toast notification; l={data.Lessons}, r={data.Reviews}")
         SendStudyToastNotification(data, notificationText)
 
         ' Send tile notification
+        log.Info($"Sending tile notification; l={data.Lessons}, r={data.Reviews}")
         Dim tiles = Await BuildTileXml(notificationText)
         SendTileNotifications(tiles)
 
         ' Send badge notification 
-        SendBadgeNotification(data.Lessons + data.Reviews)
+        Dim total = data.Lessons + data.Reviews
+        log.Info($"Sending badge notification; l={data.Lessons}, r={data.Reviews}, total={total}")
+        SendBadgeNotification(total)
     End Sub
 
     Public Shared Function Register(delay As TimeSpan) As IAsyncOperation(Of BackgroundTaskRegistration)
