@@ -1,0 +1,11 @@
+version: '{branch}-{build}'
+image: Visual Studio 2017
+
+before_build:
+  - nuget restore
+
+build:
+  project: "WaniKani Notifier UWP.sln"
+
+artifacts:
+  - path: "WaniKani Notifier UWP\AppPackages\*\*.appxbundle"
