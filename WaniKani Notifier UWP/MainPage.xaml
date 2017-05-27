@@ -17,15 +17,6 @@
     </Page.Resources>
 
     <Pivot Foreground="{ThemeResource SystemChromeWhiteColor}" x:Name="MainPivot" SelectionChanged="MainPivot_SelectionChanged">
-        <PivotItem Header="Debug" x:Name="DebugPivotItem">
-            <StackPanel Margin="20">
-                <Button Click="SendDummyLessons">Send dummy notification (lessons)</Button>
-                <Button Click="SendDummyLessonsAndReviews">Send dummy notification (lessons and reviews)</Button>
-                <Button Click="ResetNotifier">Reset check time</Button>
-                <Button Click="Notify">Notify</Button>
-                <Button Click="ResetCritical">Reset critical items</Button>
-            </StackPanel>
-        </PivotItem>
         <PivotItem x:Uid="Settings" Header="Settings">
             <StackPanel Margin="20">
                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}" x:Uid="ApiKeyLabel" Text="API key"/>
@@ -38,6 +29,15 @@
         </PivotItem>
         <PivotItem x:Uid="Lessons" Header="Lessons" x:Name="LessonsPivotItem" Margin="0"/>
         <PivotItem x:Uid="Reviews" Header="Reviews" x:Name="ReviewsPivotItem" Margin="0"/>
+        <PivotItem Header="Debug" x:Name="DebugPivotItem">
+            <StackPanel Margin="20">
+                <Button Click="SendDummyLessons">Send dummy notification (lessons)</Button>
+                <Button Click="SendDummyLessonsAndReviews">Send dummy notification (lessons and reviews)</Button>
+                <Button Click="ResetNotifier">Reset check time</Button>
+                <Button Click="Notify">Notify</Button>
+                <Button Click="ResetCritical">Reset critical items</Button>
+            </StackPanel>
+        </PivotItem>
         <Pivot.Style>
             <Style TargetType="Pivot">
                 <Setter Property="Margin" Value="0" />

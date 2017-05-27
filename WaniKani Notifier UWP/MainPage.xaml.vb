@@ -13,6 +13,7 @@ Public NotInheritable Class MainPage
 #If Not DEBUG Then
         ' Hide debug pivot item
         DebugPivotItem.Visibility = Visibility.Collapsed
+        DebugPivotItem.Header = ""
 #End If
 
         ' Read settings
