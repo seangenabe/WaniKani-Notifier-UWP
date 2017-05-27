@@ -8,4 +8,4 @@ build:
   project: "WaniKani Notifier UWP.sln"
 
 artifacts:
-  - path: "WaniKani Notifier UWP\\AppPackages\\*\\*.appxbundle"
+  - path: "WaniKani Notifier UWP\\AppPackages"
