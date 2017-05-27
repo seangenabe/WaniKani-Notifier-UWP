@@ -17,7 +17,7 @@ Public NotInheritable Class MainPage
 
         ' Read settings
         Dim settings = ApplicationData.Current.RoamingSettings
-        apiKeyTextBox.Text = ApiKey
+        apiKeyTextBox.Text = If(ApiKey Is Nothing, "", ApiKey)
         Select Case ActivationTarget
             Case ActivationTargetType.DefaultBrowser
                 ActivationTargetDefaultBrowserRadioButton.IsChecked = True
